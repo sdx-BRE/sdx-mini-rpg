@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://8tqyi7fg3k0j"]
+
+[ext_resource type="Texture2D" uid="uid://bj3gd7aigsnka" path="res://assets/textures/skybox/sky_16_2k.png" id="1_eot4p"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_q4vwf"]
+panorama = ExtResource("1_eot4p")
+
+[sub_resource type="Sky" id="Sky_lob70"]
+sky_material = SubResource("PanoramaSkyMaterial_q4vwf")
+
+[sub_resource type="Environment" id="Environment_3nqp0"]
+background_mode = 2
+sky = SubResource("Sky_lob70")
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_eot4p"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_q4vwf"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lob70"]
+size = Vector3(50, 1, 50)
+
+[node name="PrototypeMap" type="Node" unique_id=1089694823]
+
+[node name="Environment" type="Node" parent="." unique_id=892139280]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment" unique_id=234128259]
+environment = SubResource("Environment_3nqp0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment" unique_id=1709324550]
+transform = Transform3D(1, 0, 0, 0, -0.70710677, 0.70710677, 0, -0.70710677, -0.70710677, 0, 10, 0)
+shadow_enabled = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1652307274]
+navigation_mesh = SubResource("NavigationMesh_eot4p")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D" unique_id=598048046]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D" unique_id=1356343624]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_q4vwf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=1042234942]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_lob70")

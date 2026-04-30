@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://urml8crfb6ap"]
+
+[ext_resource type="Script" uid="uid://bh8c7w2tunomv" path="res://entities/characters/base/base_character.gd" id="1_fpf3j"]
+[ext_resource type="Script" uid="uid://cmqy6mkvnp4hv" path="res://entities/characters/base/base_character_bootstrapper.gd" id="2_p3hhh"]
+[ext_resource type="Script" uid="uid://bmfu2tabxgrsa" path="res://entities/shared/damage/damage_hitbox.gd" id="3_bvbep"]
+[ext_resource type="PackedScene" uid="uid://bfdvldty8ivie" path="res://entities/shared/directional_target_marker/directional_target_marker.tscn" id="4_ge0qk"]
+[ext_resource type="Texture2D" uid="uid://cohptr7qsh3e2" path="res://assets/textures/kenney_particle_pack/circle_03.png" id="5_ugvmi"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_q1rt8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fpf3j"]
+
+[node name="BaseCharacter" type="CharacterBody3D" unique_id=1333191430]
+collision_mask = 21
+script = ExtResource("1_fpf3j")
+bootstrap_script = ExtResource("2_p3hhh")
+
+[node name="HitboxCollision" type="CollisionShape3D" parent="." unique_id=1859453929]
+shape = SubResource("CylinderShape3D_q1rt8")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1189251113]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("3_bvbep")
+
+[node name="HitboxDamage" type="CollisionShape3D" parent="Area3D" unique_id=740944384]
+shape = SubResource("CapsuleShape3D_fpf3j")
+
+[node name="Marker" type="Node3D" parent="." unique_id=1437993844]
+
+[node name="TargetPoint" type="Marker3D" parent="Marker" unique_id=1840989078]
+
+[node name="DirectionalTargetMarker" parent="Marker" unique_id=1582244022 instance=ExtResource("4_ge0qk")]
+visible = false
+
+[node name="GroundTargetMarker" type="Decal" parent="Marker" unique_id=1991515010]
+texture_albedo = ExtResource("5_ugvmi")
+emission_energy = 3.06
+modulate = Color(0.2, 0.7176471, 0, 1)

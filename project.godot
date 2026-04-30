@@ -1,0 +1,47 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="SDX Mini RGP"
+run/main_scene="uid://8tqyi7fg3k0j"
+config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+DamageGateway="*uid://ckp7gxlu6povk"
+CursorManager="*uid://bbljt2jnggcfj"
+
+[dotnet]
+
+project/assembly_name="SDX Mini RGP"
+
+
+[layer_names]
+3d_render/layer_1="World"
+3d_render/layer_2="Entities"
+3d_render/layer_3="Effects"
+3d_physics/layer_1="PlayerCollision"
+3d_physics/layer_2="PlayerDamage"
+3d_physics/layer_3="EnemyCollision"
+3d_physics/layer_4="EnemyDamage"
+3d_physics/layer_5="World"
+3d_physics/layer_6="SpellPlayer"
+3d_physics/layer_7="SpellEnemy"
+
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"

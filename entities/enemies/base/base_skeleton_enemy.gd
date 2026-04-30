@@ -1,0 +1,80 @@
+class_name BaseSkeletonEnemy extends CharacterBody3D
+
+signal died()
+
+@export var data: EnemyData
+@export var anim_params: AnimationTreeParameter
+@export var bootstrap_script: Script
+
+@onready var anim_tree: AnimationTree = $AnimationTree
+@onready var pivot := $Pivot
+@onready var agent: NavigationAgent3D = $NavigationAgent3D
+@onready var ui: EnemyUI = $EnemyViewport
+@onready var fov: Area3D = $Fov
+@onready var target_point := $TargetPoint
+@onready var directional_target_marker := $DirectionalTargetMarker
+
+@export_group("Abilities")
+@export var abilities: Array[AbilityData]
+
+const HIT_WEAK_COOLDOWN := 0.2
+const HIT_STRONG_COOLDOWN := 0.4
+
+var _status_manager: EntityStatusManager
+var _processor: EntityProcessor
+var _target_handler: AiTargetHandler
+var _anim: EnemyAnimation
+var _ability_system: AbilitySystem
+
+func _ready() -> void:
+	var bootstrapper: BaseSkeletonEnemyBootstrapper = bootstrap_script.new(self)
+	if bootstrapper.has_method("setup"):
+		bootstrapper.setup(self)
+	
+	bootstrapper.boot()
+
+func _process(delta: float) -> void:
+	_processor.process(delta)
+
+func _physics_process(delta: float) -> void:
+	_processor.physics_process(delta)
+
+func execute_cast() -> void:
+	_ability_system.notify_animation_event()
+
+func take_damage(hit: DamageInstance) -> void:
+	var final_damage := _status_manager.take_damage(hit)
+	if not _status_manager.is_alive():
+		return
+	
+	if not hit.should_trigger_hit_animation():
+		return
+	
+	if final_damage >= 12: # Todo: Fix hardcoded value
+		_anim.hit_strong()
+	else:
+		_anim.hit_weak()
+
+func get_target_point() -> Marker3D:
+	return target_point
+
+func on_die() -> void:
+	if not anim_tree.animation_finished.is_connected(on_death_anim_finished):
+		anim_tree.animation_finished.connect(on_death_anim_finished)
+	
+	_anim.die()
+	set_physics_process(false)
+	set_process(false)
+
+func on_death_anim_finished(anim_name: StringName) -> void:
+	if anim_name == anim_params.anim_name_death:
+		anim_tree.animation_finished.disconnect(on_death_anim_finished)
+		await get_tree().create_timer(1.0).timeout
+		died.emit()
+		queue_free()
+
+func _on_fov_entered(body: Node3D):
+	_target_handler.add_target(body)
+
+func _on_fov_exited(body: Node3D):
+	_target_handler.remove_target(body)
