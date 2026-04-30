@@ -1,7 +1,7 @@
 using System;
 using SDX.AbilitySystem.Resources.Trigger;
 
-namespace SDX.AbilitySystem.Core.Handlers
+namespace SDX.AbilitySystem.Core.Execution.Trigger
 {
     public interface IAbilityExecuteTriggerHandler
     {

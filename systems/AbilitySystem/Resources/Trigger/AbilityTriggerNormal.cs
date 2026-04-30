@@ -1,5 +1,5 @@
 using Godot;
-using SDX.AbilitySystem.Core.Handlers;
+using SDX.AbilitySystem.Core.Execution.Trigger;
 
 namespace SDX.AbilitySystem.Resources.Trigger
 {
