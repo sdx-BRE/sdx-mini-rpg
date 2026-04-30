@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://8tqyi7fg3k0j"]
 
 [ext_resource type="Texture2D" uid="uid://bj3gd7aigsnka" path="res://assets/textures/skybox/sky_16_2k.png" id="1_eot4p"]
+[ext_resource type="PackedScene" uid="uid://ds5fgcjjxpwdp" path="res://entities/characters/mage/mage_character.tscn" id="2_q4vwf"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_q4vwf"]
 panorama = ExtResource("1_eot4p")
@@ -35,6 +36,8 @@ shadow_enabled = true
 navigation_mesh = SubResource("NavigationMesh_eot4p")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D" unique_id=598048046]
+collision_layer = 16
+collision_mask = 5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D" unique_id=1356343624]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -43,3 +46,5 @@ mesh = SubResource("BoxMesh_q4vwf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=1042234942]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_lob70")
+
+[node name="MageCharacter" parent="." unique_id=1333191430 instance=ExtResource("2_q4vwf")]

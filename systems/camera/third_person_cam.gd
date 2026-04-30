@@ -1,5 +1,4 @@
-class_name ThirdPersonCam
-extends Marker3D
+class_name ThirdPersonCam extends Marker3D
 
 @export var camera_node: Camera3D
 

@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cohptr7qsh3e2" path="res://assets/textures/kenney_particle_pack/circle_03.png" id="5_ugvmi"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_q1rt8"]
+height = 2.2
+radius = 0.75
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fpf3j"]
 
@@ -16,6 +18,7 @@ script = ExtResource("1_fpf3j")
 bootstrap_script = ExtResource("2_p3hhh")
 
 [node name="HitboxCollision" type="CollisionShape3D" parent="." unique_id=1859453929]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 shape = SubResource("CylinderShape3D_q1rt8")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1189251113]
@@ -25,6 +28,7 @@ monitoring = false
 script = ExtResource("3_bvbep")
 
 [node name="HitboxDamage" type="CollisionShape3D" parent="Area3D" unique_id=740944384]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_fpf3j")
 
 [node name="Marker" type="Node3D" parent="." unique_id=1437993844]
