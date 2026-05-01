@@ -1,14 +1,18 @@
 using Godot;
 using SDX.AbilitySystem.Core.Execution.Aiming;
+using SDX.AbilitySystem.Core.Execution;
+using SDX.AbilitySystem.Core.Context;
 
 namespace SDX.AbilitySystem.Resources.Targeting
 {
     [GlobalClass]
-    public partial class AbilityTargetingLocation : AbilityTargetingInput
+    public partial class AbilityTargetingLocation : AbilityTargeting
     {
-        public override IAbilityAimingHandler CreateHandler(IAbilityAimingContext context)
+        [Export] public float CastRange { get; set; } = 10.0f;
+
+        public override IAbilityAimingHandler CreateHandler(IAbilityAimingContext context, AbilityExecutionBlackboard blackboard)
         {
-            return new DummyAimingHandler(context);
+            return new DummyAimingHandler(context, blackboard);
         }
     }
 }

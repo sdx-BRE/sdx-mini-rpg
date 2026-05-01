@@ -1,19 +1,19 @@
 using Godot;
 using SDX.AbilitySystem.Core.Execution.Aiming;
+using SDX.AbilitySystem.Core.Execution;
+using SDX.AbilitySystem.Core.Context;
 
 namespace SDX.AbilitySystem.Resources.Targeting
 {
     [GlobalClass]
     public partial class AbilityTargetingAIDirectional : AbilityTargeting
     {
-        [Export] public float AimSpeed { get; set; } = 2.0f;
-        [Export] public float LockOnTime { get; set; } = 2.0f;
-        [Export] public float MaxAimTime { get; set; } = 10.0f;
-        [Export] public float LockOnDotThreshold { get; set; } = 0.8f;
+        [Export] public float AimSpeed { get; set; } = 5.0f;
+        [Export] public float LockOnTime { get; set; } = 0.5f;
 
-        public override IAbilityAimingHandler CreateHandler(IAbilityAimingContext context)
+        public override IAbilityAimingHandler CreateHandler(IAbilityAimingContext context, AbilityExecutionBlackboard blackboard)
         {
-            return new DummyAimingHandler(context);
+            return new DummyAimingHandler(context, blackboard);
         }
     }
 }

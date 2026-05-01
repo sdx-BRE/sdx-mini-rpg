@@ -1,6 +1,7 @@
 using Godot;
 using SDX.AbilitySystem.Resources.Targeting;
 using SDX.AbilitySystem.Core.Execution.Aiming;
+using SDX.AbilitySystem.Core.Execution;
 
 namespace SDX.AbilitySystem.Tests.Resources.Targeting
 {
@@ -15,7 +16,8 @@ namespace SDX.AbilitySystem.Tests.Resources.Targeting
         private void TestHandlerCreation()
         {
             var targeting = new AbilityTargetingSelf();
-            var handler = targeting.CreateHandler(null);
+            var blackboard = new AbilityExecutionBlackboard();
+            var handler = targeting.CreateHandler(null, blackboard);
             
             AssertTrue(handler is DummyAimingHandler, "Should create a DummyAimingHandler");
         }
