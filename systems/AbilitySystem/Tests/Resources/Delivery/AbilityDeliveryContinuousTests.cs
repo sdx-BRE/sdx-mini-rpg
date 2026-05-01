@@ -1,6 +1,7 @@
 using Godot;
 using SDX.AbilitySystem.Resources.Delivery;
 using SDX.AbilitySystem.Core.Execution.Execute.Delivery;
+using SDX.AbilitySystem.Core.Execution;
 
 namespace SDX.AbilitySystem.Tests.Resources.Delivery
 {
@@ -24,7 +25,8 @@ namespace SDX.AbilitySystem.Tests.Resources.Delivery
         private void TestHandlerCreation()
         {
             var delivery = new AbilityDeliveryContinuous();
-            var handler = delivery.CreateHandler(null, null);
+            var blackboard = new AbilityExecutionBlackboard();
+            var handler = delivery.CreateHandler(null, blackboard);
             
             AssertTrue(handler is DummyDeliveryHandler, "Should create a DummyDeliveryHandler");
         }

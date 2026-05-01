@@ -1,5 +1,7 @@
 using Godot;
 using SDX.AbilitySystem.Core.Execution.Execute.Delivery;
+using SDX.AbilitySystem.Core.Execution;
+using SDX.AbilitySystem.Core.Context;
 
 namespace SDX.AbilitySystem.Resources.Delivery
 {
@@ -8,7 +10,7 @@ namespace SDX.AbilitySystem.Resources.Delivery
     {
         [Export] public float DashPower { get; set; } = 15.0f;
 
-        public override IAbilityExecuteDeliveryHandler CreateHandler(object context, object blackboard)
+        public override IAbilityExecuteDeliveryHandler CreateHandler(IAbilityExecuteContext context, AbilityExecutionBlackboard blackboard)
         {
             return new DummyDeliveryHandler(context, blackboard);
         }
