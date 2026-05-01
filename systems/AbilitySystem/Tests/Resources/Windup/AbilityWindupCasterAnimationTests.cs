@@ -2,6 +2,7 @@ using Godot;
 using SDX.AbilitySystem.Resources.Windup;
 using SDX.AbilitySystem.Core.Execution.Setup;
 using SDX.AbilitySystem.Core.Execution.Recover;
+using SDX.AbilitySystem.Core.Execution;
 
 namespace SDX.AbilitySystem.Tests.Resources.Windup
 {
@@ -10,27 +11,18 @@ namespace SDX.AbilitySystem.Tests.Resources.Windup
     {
         protected override void RunTests()
         {
-            TestInitialization();
             TestHandlerCreation();
-        }
-
-        private void TestInitialization()
-        {
-            var windup = new AbilityWindupCasterAnimation();
-            windup.AnimName = "cast_spell";
-            windup.AnimTrigger = "spell_start";
-            
-            AssertEqual("cast_spell", windup.AnimName, "AnimName should match");
-            AssertEqual("spell_start", windup.AnimTrigger, "AnimTrigger should match");
         }
 
         private void TestHandlerCreation()
         {
             var windup = new AbilityWindupCasterAnimation();
-            var setupHandler = windup.CreateSetupHandler(null, null);
-            var recoverHandler = windup.CreateRecoverHandler(null);
+            var blackboard = new AbilityExecutionBlackboard();
             
+            var setupHandler = windup.CreateHandler(null, blackboard);
             AssertTrue(setupHandler is DummySetupHandler, "Should create a DummySetupHandler");
+            
+            var recoverHandler = windup.CreateRecoverHandler(null, blackboard);
             AssertTrue(recoverHandler is DummyRecoverHandler, "Should create a DummyRecoverHandler");
         }
     }

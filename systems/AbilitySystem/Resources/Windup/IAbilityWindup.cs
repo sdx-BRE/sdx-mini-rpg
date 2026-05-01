@@ -1,11 +1,13 @@
 using SDX.AbilitySystem.Core.Execution.Setup;
 using SDX.AbilitySystem.Core.Execution.Recover;
+using SDX.AbilitySystem.Core.Execution;
+using SDX.AbilitySystem.Core.Context;
 
 namespace SDX.AbilitySystem.Resources.Windup
 {
     public interface IAbilityWindup
     {
-        IAbilitySetupHandler CreateSetupHandler(object context, object blackboard);
-        IAbilityRecoverHandler CreateRecoverHandler(object context);
+        IAbilitySetupHandler CreateHandler(IAbilitySetupContext context, AbilityExecutionBlackboard blackboard);
+        IAbilityRecoverHandler CreateRecoverHandler(IAbilityRecoverContext context, AbilityExecutionBlackboard blackboard);
     }
 }

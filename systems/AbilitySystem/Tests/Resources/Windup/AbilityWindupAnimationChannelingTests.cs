@@ -2,6 +2,7 @@ using Godot;
 using SDX.AbilitySystem.Resources.Windup;
 using SDX.AbilitySystem.Core.Execution.Setup;
 using SDX.AbilitySystem.Core.Execution.Recover;
+using SDX.AbilitySystem.Core.Execution;
 
 namespace SDX.AbilitySystem.Tests.Resources.Windup
 {
@@ -16,10 +17,12 @@ namespace SDX.AbilitySystem.Tests.Resources.Windup
         private void TestHandlerCreation()
         {
             var windup = new AbilityWindupAnimationChanneling();
-            var setupHandler = windup.CreateSetupHandler(null, null);
-            var recoverHandler = windup.CreateRecoverHandler(null);
+            var blackboard = new AbilityExecutionBlackboard();
             
+            var setupHandler = windup.CreateHandler(null, blackboard);
             AssertTrue(setupHandler is DummySetupHandler, "Should create a DummySetupHandler");
+            
+            var recoverHandler = windup.CreateRecoverHandler(null, blackboard);
             AssertTrue(recoverHandler is DummyRecoverHandler, "Should create a DummyRecoverHandler");
         }
     }
