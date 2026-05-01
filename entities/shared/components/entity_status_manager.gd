@@ -39,7 +39,7 @@ func take_damage(hit: DamageInstance) -> float:
 	for payload in hit.get_payloads():
 		damage += payload.get_immediate_damage(_stats)
 		
-		var debuff := payload.get_debuff(_stats)
+		var debuff = payload.get_debuff(_stats)
 		if debuff != null:
 			_debuffs.add_debuff(debuff)
 	
