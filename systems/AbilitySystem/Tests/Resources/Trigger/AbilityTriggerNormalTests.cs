@@ -1,6 +1,6 @@
 using Godot;
 using SDX.AbilitySystem.Resources.Trigger;
-using SDX.AbilitySystem.Core.Execution.Trigger;
+using SDX.AbilitySystem.Core.Execution.Execute.Trigger;
 
 namespace SDX.AbilitySystem.Tests.Resources.Trigger
 {
