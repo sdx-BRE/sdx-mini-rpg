@@ -1,6 +1,7 @@
 using Godot;
 using SDX.AbilitySystem.Resources.Trigger;
 using SDX.AbilitySystem.Core.Execution.Execute.Trigger;
+using SDX.AbilitySystem.Core.Execution;
 
 namespace SDX.AbilitySystem.Tests.Resources.Trigger
 {
@@ -15,7 +16,8 @@ namespace SDX.AbilitySystem.Tests.Resources.Trigger
         private void TestHandlerCreation()
         {
             var trigger = new AbilityTriggerNormal();
-            var handler = trigger.CreateHandler(null);
+            var blackboard = new AbilityExecutionBlackboard();
+            var handler = trigger.CreateHandler(null, blackboard);
             
             AssertTrue(handler is DummyTriggerHandler, "Should create a DummyTriggerHandler");
         }
