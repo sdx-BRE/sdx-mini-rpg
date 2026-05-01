@@ -1,15 +1,11 @@
 using Godot;
+using SDX.AbilitySystem.Core.Execution.Execute.Delivery;
 
 namespace SDX.AbilitySystem.Resources.Delivery
 {
-    public interface IAbilityDelivery
-    {
-        object CreateHandler(object context, object blackboard);
-    }
-
     [GlobalClass]
     public abstract partial class AbilityDelivery : Resource, IAbilityDelivery
     {
-        public abstract object CreateHandler(object context, object blackboard);
+        public abstract IAbilityExecuteDeliveryHandler CreateHandler(object context, object blackboard);
     }
 }
