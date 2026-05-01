@@ -1,5 +1,6 @@
 using System;
 using SDX.AbilitySystem.Resources.Delivery;
+using SDX.AbilitySystem.Core.Context;
 
 namespace SDX.AbilitySystem.Core.Execution.Execute.Delivery
 {
@@ -8,10 +9,10 @@ namespace SDX.AbilitySystem.Core.Execution.Execute.Delivery
         public event Action CostRequired;
         public event Action<float> ContinuousCostRequired;
 
-        protected readonly object Context;
-        protected readonly object Blackboard;
+        protected readonly IAbilityExecuteContext Context;
+        protected readonly AbilityExecutionBlackboard Blackboard;
 
-        protected AbilityExecuteDeliveryHandler(object context, object blackboard)
+        protected AbilityExecuteDeliveryHandler(IAbilityExecuteContext context, AbilityExecutionBlackboard blackboard)
         {
             Context = context;
             Blackboard = blackboard;

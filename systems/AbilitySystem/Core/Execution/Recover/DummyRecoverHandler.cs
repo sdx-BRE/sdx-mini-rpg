@@ -1,19 +1,15 @@
-using System;
 using SDX.AbilitySystem.Resources.Windup;
+using SDX.AbilitySystem.Core.Context;
 
 namespace SDX.AbilitySystem.Core.Execution.Recover
 {
-    public partial class DummyRecoverHandler : IAbilityRecoverHandler
+    public partial class DummyRecoverHandler : AbilityRecoverHandler
     {
-        private readonly object _context;
+        public DummyRecoverHandler(IAbilityRecoverContext context, AbilityExecutionBlackboard blackboard) 
+            : base(context, blackboard) { }
 
-        public DummyRecoverHandler(object context)
-        {
-            _context = context;
-        }
-
-        public void Setup(AbilityWindup data) { }
-        public void Recover() { }
-        public void Cancel() { }
+        public override void Setup(AbilityWindup data) { }
+        public override void Recover() { }
+        public override void Cancel() { }
     }
 }
