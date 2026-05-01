@@ -16,11 +16,11 @@ func execute(_aiming_result: AbilityAimingResult) -> void:
 			var damage_instance := DamageInstance.from_ability(_data.damage)
 			target.take_damage(damage_instance)
 		
-		_asd(target)
+		_apply_hit_effects(target)
 	
 	_emit_cost_required()
 
-func _asd(target: Node3D) -> void:
+func _apply_hit_effects(target: Node3D) -> void:
 	var target_point: Node3D = target
 	if target.has_method(&"get_target_point"):
 		target_point = target.get_target_point()
