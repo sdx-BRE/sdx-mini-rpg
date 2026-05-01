@@ -1,15 +1,11 @@
 using Godot;
+using SDX.AbilitySystem.Core.Execution.Aiming;
 
 namespace SDX.AbilitySystem.Resources.Targeting
 {
-    public interface IAbilityTargeting
-    {
-        object GetStrategy(object context);
-    }
-
     [GlobalClass]
     public abstract partial class AbilityTargeting : Resource, IAbilityTargeting
     {
-        public abstract object GetStrategy(object context);
+        public abstract IAbilityAimingHandler CreateHandler(IAbilityAimingContext context);
     }
 }
